@@ -1,45 +1,76 @@
-// Variáveis para utilização do menu
-int X_retangulo, Y_retangulo; // Posição do botão quadrado
-int X_circulo, Y_circulo;     // Posição do botão círculo
-int rectSize = 90;     // Diâmetro do retângulo
-int circleSize = 93;   // Diâmetro do retângulo
-color rectColor, circleColor, baseColor;
-color rectHighlight, circleHighlight;
-color currentColor;
-boolean rectOver = false;
-boolean circleOver = false;
+// code written by Mitko Nikov
 
-PShape pointer;
+ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
+boolean logged = false; // DEMO
 
 void setup() {
-  // Sinalização em tela da criação da janela
-  println("Criando janela menu principal");
-  // Criação da janela principal
-  size(300, 300, P2D);
-  
-  // Parâmetros do botão retangular
-  // TODO: Criar própria função 'rect' e 'triangle'
-  rectColor = color(0);
-  rectHighlight = color(51);
-  X_retangulo = width/2-rectSize-10;
-  Y_retangulo = height/2-rectSize/2;
+   size(400, 250);
+   
+   // USERNAME TEXTBOX
+   // CONFIGURED USING THE GLOBAL VARS
+   TEXTBOX userTB = new TEXTBOX();
+   userTB.X = 160;
+   userTB.Y = 103;
+   userTB.W = 200;
+   userTB.H = 35;
+   
+   // PASSWORD TEXTBOX
+   // CONFIGURED USING THE CLASS CONSTRACTOR
+   TEXTBOX passTB = new TEXTBOX(160, 153, 200, 35);
+   passTB.BorderWeight = 3;
+   passTB.BorderEnable = true;
+   
+   textboxes.add(userTB);
+   textboxes.add(passTB);
+}
 
-  // Parâmetros do botão circular
-  circleColor = color(255);
-  circleHighlight = color(204);
-  X_circulo = width/2+circleSize/2+10;
-  Y_circulo = height/2;
+void draw() {
+   background(40, 160, 40);
+   
+   // LABELS
+   fill(250, 250, 250);
+   text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
+   textSize(15);
+   text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 80);
+   textSize(24);
+   text("Username: ", 20, 130);
+   text("Password: ", 20, 180);
+   
+   // DRAW THE TEXTBOXES
+   for (TEXTBOX t : textboxes) {
+      t.DRAW();
+   }
+   
+   // JUST FOR DEMO (DO NOT EVER DO THAT!)
+   if (logged) {
+      fill(250, 250, 250);
+      text("YOU ARE LOGGED IN!", (width - textWidth("YOU ARE LOGGED IN")) / 2, 230);
+   }
+}
 
-  ellipseMode(CENTER);  
-  
-  // Criação das formas na tela principal
-  rect(X_retangulo, Y_retangulo, rectSize, rectSize);
-  ellipse(X_circulo, Y_circulo, circleSize, circleSize);
+void mousePressed() {
+   for (TEXTBOX t : textboxes) {
+      t.PRESSED(mouseX, mouseY);
+   }
+}
 
-  
-  // Ponteiro centralizado no mouse, compartilhado entre as janelas
-  pointer = createShape(ELLIPSE, 0, 0, 20, 20);
+// JUST FOR DEMO
+void Submit() {
+   if (textboxes.get(0).Text.equals("mitkonikov")) {
+      if (textboxes.get(1).Text.equals("test1234")) {
+         logged = true;
+      } else {
+         logged = false;
+      }
+   } else {
+      logged = false;
+   }
+}
 
-  // Muda localização da janela principal
-  windowMove(0, 0);
+void keyPressed() {
+   for (TEXTBOX t : textboxes) {
+      if (t.KEYPRESSED(key, (int)keyCode)) {
+         Submit();
+      }
+   }
 }

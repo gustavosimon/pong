@@ -15,54 +15,196 @@ import java.io.IOException;
 
 public class pong extends PApplet {
 
-// Variáveis para utilização do menu
-int X_retangulo, Y_retangulo; // Posição do botão quadrado
-int X_circulo, Y_circulo;     // Posição do botão círculo
-int rectSize = 90;     // Diâmetro do retângulo
-int circleSize = 93;   // Diâmetro do retângulo
-int rectColor, circleColor, baseColor;
-int rectHighlight, circleHighlight;
-int currentColor;
-boolean rectOver = false;
-boolean circleOver = false;
+// code written by Mitko Nikov
 
-PShape pointer;
+ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
+boolean logged = false; // DEMO
 
 public void setup() {
-  // Sinalização em tela da criação da janela
-  println("Criando janela menu principal");
-  // Criação da janela principal
-  /* size commented out by preprocessor */;
-  
-  // Parâmetros do botão retangular
-  // TODO: Criar própria função 'rect' e 'triangle'
-  rectColor = color(0);
-  rectHighlight = color(51);
-  X_retangulo = width/2-rectSize-10;
-  Y_retangulo = height/2-rectSize/2;
+   /* size commented out by preprocessor */;
+   
+   // USERNAME TEXTBOX
+   // CONFIGURED USING THE GLOBAL VARS
+   TEXTBOX userTB = new TEXTBOX();
+   userTB.X = 160;
+   userTB.Y = 103;
+   userTB.W = 200;
+   userTB.H = 35;
+   
+   // PASSWORD TEXTBOX
+   // CONFIGURED USING THE CLASS CONSTRACTOR
+   TEXTBOX passTB = new TEXTBOX(160, 153, 200, 35);
+   passTB.BorderWeight = 3;
+   passTB.BorderEnable = true;
+   
+   textboxes.add(userTB);
+   textboxes.add(passTB);
+}
 
-  // Parâmetros do botão circular
-  circleColor = color(255);
-  circleHighlight = color(204);
-  X_circulo = width/2+circleSize/2+10;
-  Y_circulo = height/2;
+public void draw() {
+   background(40, 160, 40);
+   
+   // LABELS
+   fill(250, 250, 250);
+   text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
+   textSize(15);
+   text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 80);
+   textSize(24);
+   text("Username: ", 20, 130);
+   text("Password: ", 20, 180);
+   
+   // DRAW THE TEXTBOXES
+   for (TEXTBOX t : textboxes) {
+      t.DRAW();
+   }
+   
+   // JUST FOR DEMO (DO NOT EVER DO THAT!)
+   if (logged) {
+      fill(250, 250, 250);
+      text("YOU ARE LOGGED IN!", (width - textWidth("YOU ARE LOGGED IN")) / 2, 230);
+   }
+}
 
-  ellipseMode(CENTER);  
-  
-  // Criação das formas na tela principal
-  rect(X_retangulo, Y_retangulo, rectSize, rectSize);
-  ellipse(X_circulo, Y_circulo, circleSize, circleSize);
+public void mousePressed() {
+   for (TEXTBOX t : textboxes) {
+      t.PRESSED(mouseX, mouseY);
+   }
+}
 
-  
-  // Ponteiro centralizado no mouse, compartilhado entre as janelas
-  pointer = createShape(ELLIPSE, 0, 0, 20, 20);
+// JUST FOR DEMO
+public void Submit() {
+   if (textboxes.get(0).Text.equals("mitkonikov")) {
+      if (textboxes.get(1).Text.equals("test1234")) {
+         logged = true;
+      } else {
+         logged = false;
+      }
+   } else {
+      logged = false;
+   }
+}
 
-  // Muda localização da janela principal
-  windowMove(0, 0);
+public void keyPressed() {
+   for (TEXTBOX t : textboxes) {
+      if (t.KEYPRESSED(key, (int)keyCode)) {
+         Submit();
+      }
+   }
+}
+public class TEXTBOX {
+
+   public int X = 0, Y = 0, H = 35, W = 200;
+   public int TEXTSIZE = 24;
+   
+   // COLORS
+   public int Background = color(140, 140, 140);
+   public int Foreground = color(0, 0, 0);
+   public int BackgroundSelected = color(160, 160, 160);
+   public int Border = color(30, 30, 30);
+   
+   public boolean BorderEnable = false;
+   public int BorderWeight = 1;
+   
+   public String Text = "";
+   public int TextLength = 0;
+
+   private boolean selected = false;
+   
+   TEXTBOX() {
+      // CREATE OBJECT DEFAULT TEXTBOX
+   }
+   
+   TEXTBOX(int x, int y, int w, int h) {
+      X = x; Y = y; W = w; H = h;
+   }
+   
+   public void DRAW() {
+      // DRAWING THE BACKGROUND
+      if (selected) {
+         fill(BackgroundSelected);
+      } else {
+         fill(Background);
+      }
+      
+      if (BorderEnable) {
+         strokeWeight(BorderWeight);
+         stroke(Border);
+      } else {
+         noStroke();
+      }
+      
+      rect(X, Y, W, H);
+      
+      // DRAWING THE TEXT ITSELF
+      fill(Foreground);
+      textSize(TEXTSIZE);
+      text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);
+   }
+   
+   // IF THE KEYCODE IS ENTER RETURN 1
+   // ELSE RETURN 0
+   public boolean KEYPRESSED(char KEY, int KEYCODE) {
+      if (selected) {
+         if (KEYCODE == (int)BACKSPACE) {
+            BACKSPACE();
+         } else if (KEYCODE == 32) {
+            // SPACE
+            addText(' ');
+         } else if (KEYCODE == (int)ENTER) {
+            return true;
+         } else {
+            // CHECK IF THE KEY IS A LETTER OR A NUMBER
+            boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
+            boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
+            boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
+      
+            if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
+               addText(KEY);
+            }
+         }
+      }
+      
+      return false;
+   }
+   
+   private void addText(char text) {
+      // IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
+      if (textWidth(Text + text) < W) {
+         Text += text;
+         TextLength++;
+      }
+   }
+   
+   private void BACKSPACE() {
+      if (TextLength - 1 >= 0) {
+         Text = Text.substring(0, TextLength - 1);
+         TextLength--;
+      }
+   }
+   
+   // FUNCTION FOR TESTING IS THE POINT
+   // OVER THE TEXTBOX
+   private boolean overBox(int x, int y) {
+      if (x >= X && x <= X + W) {
+         if (y >= Y && y <= Y + H) {
+            return true;
+         }
+      }
+      
+      return false;
+   }
+   
+   public void PRESSED(int x, int y) {
+      if (overBox(x, y)) {
+         selected = true;
+      } else {
+         selected = false;
+      }
+   }
 }
 
 
-  public void settings() { size(300, 300, P2D); }
+  public void settings() { size(400, 250); }
 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "pong" };
