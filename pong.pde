@@ -4,15 +4,32 @@ Ball ball; // Definindo a 'bola' como objeto global
 Paddle paddleLeft;
 Paddle paddleRight;
 
+int maxScore = 5;
 int scoreEsq = 0;
 int scoreDir = 0;
 
-void setup(){
-  size(800,480);
-  ball = new Ball(width/2, height/2, 50); //create a new ball to the center of the window
-  ball.speedX = 5; // Giving the ball speed in x-axis
-  ball.speedY = random(-3,3); // Giving the ball speed in y-axis
+ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
+
+void setup() {
+   size(400, 250);
+   
+   // TODO: Login menu
+   game();
+}
+
+void game(){
+  // Window size
+  windowResize(800,480);
+
+  // Centered ball to start the game
+  ball = new Ball(width/2, height/2, 50); 
+
+  // Horizontal ball speed
+  ball.speedX = 5; 
+  // Vertical ball speedx
+  ball.speedY = random(-2,2); 
   
+ 
   paddleLeft = new Paddle(15, height/2, 30,200);
   paddleRight = new Paddle(width-15, height/2, 30,200);
 
@@ -65,7 +82,7 @@ void draw(){
     paddleRight.y = paddleRight.h/2;
   }
   
-  if(scoreDir > 5 || scoreEsq > 5) {
+  if(scoreDir > maxScore || scoreEsq > maxScore) {
     exit();
   }
   // If the ball gets behind the paddle 
