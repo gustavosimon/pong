@@ -2,3 +2,5 @@ processing-java.exe
 out/pong$TEXTBOX.class
 out/pong.class
 out/source/pong.java
+out/pong$Ball.class
+out/pong$Paddle.class

@@ -1,13 +1,14 @@
-Ball ball; // Define the ball as a global object 
+Ball ball; // Definindo a 'bola' como objeto global
+
 
 Paddle paddleLeft;
 Paddle paddleRight;
 
-int scoreLeft = 0;
-int scoreRight = 0;
+int scoreEsq = 0;
+int scoreDir = 0;
 
 void setup(){
-  size(800,600);
+  size(800,480);
   ball = new Ball(width/2, height/2, 50); //create a new ball to the center of the window
   ball.speedX = 5; // Giving the ball speed in x-axis
   ball.speedY = random(-3,3); // Giving the ball speed in y-axis
@@ -30,12 +31,12 @@ void draw(){
 
   
   if (ball.right() > width) {
-    scoreLeft = scoreLeft + 1;
+    scoreEsq = scoreEsq + 1;
     ball.x = width/2;
     ball.y = height/2;
   }
   if (ball.left() < 0) {
-    scoreRight = scoreRight + 1;
+    scoreDir = scoreDir + 1;
     ball.x = width/2;
     ball.y = height/2;
   }
@@ -64,7 +65,9 @@ void draw(){
     paddleRight.y = paddleRight.h/2;
   }
   
-  
+  if(scoreDir > 5 || scoreEsq > 5) {
+    exit();
+  }
   // If the ball gets behind the paddle 
   // AND if the ball is int he area of the paddle (between paddle top and bottom)
   // bounce the ball to other direction
@@ -82,8 +85,8 @@ void draw(){
   
   textSize(40);
   textAlign(CENTER);
-  text(scoreRight, width/2+30, 30); // Right side score
-  text(scoreLeft, width/2-30, 30); // Left side score
+  text(scoreDir, width/2+30, 30); // Score lado direito
+  text(scoreEsq, width/2-30, 30); // Score lado esquerdo
 }
 
 void keyPressed(){
@@ -161,9 +164,6 @@ class Ball {
   }
 
 }
-
-
-
 
 class Paddle{
 
