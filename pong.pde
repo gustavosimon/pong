@@ -14,10 +14,14 @@ void setup() {
    size(400, 250);
    
    // TODO: Login menu
-   game();
+   gameSetup();
 }
 
-void game(){
+void login(){
+  
+}
+
+void gameSetup(){
   // Window size
   windowResize(800,480);
 
@@ -33,6 +37,7 @@ void game(){
   paddleLeft = new Paddle(15, height/2, 30,200);
   paddleRight = new Paddle(width-15, height/2, 30,200);
 
+  draw();
 }
 
 void draw(){
