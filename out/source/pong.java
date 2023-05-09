@@ -29,38 +29,13 @@ ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 
 public void setup() {
    /* size commented out by preprocessor */;
-   surface.setTitle("Pong v0.1.0");
-   surface.setResizable(true);
-   login();
+   
    // TODO: Login menu
-   //gameSetup();
+   gameSetup();
 }
 
-// Coleta informações dos players
 public void login(){
-
-   // USERNAME TEXTBOX
-   // CONFIGURED USING THE GLOBAL VARS
-   TEXTBOX player1 = new TEXTBOX();
-   player1.X = 160;
-   player1.Y = 103;
-   player1.W = 200;
-   player1.H = 35;
-   
-      // USERNAME TEXTBOX
-   // CONFIGURED USING THE GLOBAL VARS
-   TEXTBOX player2 = new TEXTBOX();
-   player1.X = 160;
-   player1.Y = 133;
-   player1.W = 200;
-   player1.H = 35;
-   
-   textboxes.add(player1);
-   textboxes.add(player2);
-
-   for (TEXTBOX t : textboxes) {
-      t.DRAW();
-   }
+  
 }
 
 public void gameSetup(){
@@ -82,7 +57,7 @@ public void gameSetup(){
   draw();
 }
 
-public void drawGame(){
+public void draw(){
   background(0); //clear canvas
   ball.display(); // Draw the ball to the window
   ball.move(); //calculate a new location for the ball
