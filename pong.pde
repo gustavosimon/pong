@@ -11,14 +11,38 @@ int scoreDir = 0;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 
 void setup() {
-   size(400, 250);
-   
-   // TODO: Login menu
-   gameSetup();
+  size(400, 250);
+  gameSetup();
+  // TODO: Login menu
+  // TODO: Scoreboard
 }
 
-void login(){
-  
+// TODO: make this damn thing work properly
+public void login(){
+
+  // USERNAME TEXTBOX
+  // CONFIGURED USING THE GLOBAL VARS
+  TEXTBOX player1 = new TEXTBOX();
+  player1.X = 160;
+  player1.Y = 103;
+  player1.W = 200;
+  player1.H = 35;
+
+    // USERNAME TEXTBOX
+  // CONFIGURED USING THE GLOBAL VARS
+  TEXTBOX player2 = new TEXTBOX();
+  player1.X = 160;
+  player1.Y = 133;
+  player1.W = 200;
+  player1.H = 35;
+
+  textboxes.add(player1);
+  textboxes.add(player2);
+
+  for (TEXTBOX t : textboxes) {
+    t.DRAW();
+  }
+
 }
 
 void gameSetup(){
