@@ -8,17 +8,19 @@ int maxScore = 5;
 int scoreEsq = 0;
 int scoreDir = 0;
 
-ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
-
 void setup() {
   size(400, 250);
+  login();
   gameSetup();
   // TODO: Login menu
+  //login();
   // TODO: Scoreboard
 }
 
 // TODO: make this damn thing work properly
-public void login(){
+public StringList login(){
+
+  StringList players = new StringList();
 
   // USERNAME TEXTBOX
   // CONFIGURED USING THE GLOBAL VARS
@@ -42,7 +44,12 @@ public void login(){
   for (TEXTBOX t : textboxes) {
     t.DRAW();
   }
+  players.append("player1");
+  players.append("player2");
 
+  print(players);
+
+  return players;
 }
 
 void gameSetup(){
