@@ -1,49 +1,41 @@
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
-boolean logged = false; // DEMO
+
+boolean players = false;
 
 void LoginInit() {
-   size(400, 250);
    
-   // USERNAME TEXTBOX
-   // CONFIGURED USING THE GLOBAL VARS
-   TEXTBOX userTB = new TEXTBOX();
-   userTB.X = 160;
-   userTB.Y = 103;
-   userTB.W = 200;
-   userTB.H = 35;
+   TEXTBOX player1 = new TEXTBOX();
+   player1.X = 160;
+   player1.Y = 103;
+   player1.W = 200;
+   player1.H = 35;
    
-   // PASSWORD TEXTBOX
-   // CONFIGURED USING THE CLASS CONSTRACTOR
-   TEXTBOX passTB = new TEXTBOX(160, 153, 200, 35);
-   passTB.BorderWeight = 3;
-   passTB.BorderEnable = true;
+   TEXTBOX player2 = new TEXTBOX();
+   player2.X = 160;
+   player2.Y = 153;
+   player2.W = 200;
+   player2.H = 35;
    
-   textboxes.add(userTB);
-   textboxes.add(passTB);
+   textboxes.add(player1);
+   textboxes.add(player2);
 }
 
 void drawLogin() {
-   background(40, 160, 40);
+
+    background(137, 12, 201);
+    // LABELS
+    fill(250, 250, 250);
+    text("Pong", (width - textWidth("LOGIN FORM")) / 2, 60);
+    textSize(15);
+    text("Press Enter to Play", (width - textWidth("Press Enter to Play")) / 2, 80);
+    textSize(24);
+    text("Player 1: ", 20, 130);
+    text("Player 2: ", 20, 180);
+    
+    for (TEXTBOX t : textboxes) {
+        t.DRAW();
+    }
    
-   // LABELS
-   fill(250, 250, 250);
-   text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
-   textSize(15);
-   text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 80);
-   textSize(24);
-   text("Username: ", 20, 130);
-   text("Password: ", 20, 180);
-   
-   // DRAW THE TEXTBOXES
-   for (TEXTBOX t : textboxes) {
-      t.DRAW();
-   }
-   
-   // JUST FOR DEMO (DO NOT EVER DO THAT!)
-   if (logged) {
-      fill(250, 250, 250);
-      text("YOU ARE LOGGED IN!", (width - textWidth("YOU ARE LOGGED IN")) / 2, 230);
-   }
 }
 
 void mousePressed() {
@@ -52,23 +44,22 @@ void mousePressed() {
    }
 }
 
-// JUST FOR DEMO
-void Submit() {
-   if (textboxes.get(0).Text.equals("mitkonikov")) {
-      if (textboxes.get(1).Text.equals("test1234")) {
-         logged = true;
+void submit() {
+   if (textboxes.get(0).Text.equals("lemmert")) {
+      if (textboxes.get(1).Text.equals("simon")) {
+         players = true;
       } else {
-         logged = false;
+         players = false;
       }
    } else {
-      logged = false;
+      players = false;
    }
 }
 
-void keyPressedL() {
+void keyPressed() {
    for (TEXTBOX t : textboxes) {
       if (t.KEYPRESSED(key, (int)keyCode)) {
-         Submit();
+         submit();
       }
    }
 }
