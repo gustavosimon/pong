@@ -25,7 +25,7 @@ void drawLogin() {
     background(137, 12, 201);
     // LABELS
     fill(250, 250, 250);
-    text("Pong", (width - textWidth("LOGIN FORM")) / 2, 60);
+    text("Pong", (width - textWidth("Pong")) / 2, 60);
     textSize(15);
     text("Press Enter to Play", (width - textWidth("Press Enter to Play")) / 2, 80);
     textSize(24);

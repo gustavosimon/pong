@@ -1,5 +1,6 @@
 Ball ball; // Definindo a 'bola' como objeto global
 
+boolean finishGame = false;
 
 Paddle paddleLeft;
 Paddle paddleRight;
@@ -109,7 +110,8 @@ void drawGame(){
   }
   
   if(scoreDir > maxScore || scoreEsq > maxScore) {
-    exit();
+    finishGame = true;
+    return;
   }
   // If the ball gets behind the paddle 
   // AND if the ball is int he area of the paddle (between paddle top and bottom)
