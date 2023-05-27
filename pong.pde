@@ -15,7 +15,7 @@ void setup() {
 void draw() {
    // 
    drawLogin();
-   if (!players) {
+   if (!flg_players) {
       return;
    }
    //

@@ -1,6 +1,6 @@
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 
-boolean players = false;
+boolean flg_players = false;
 
 void LoginInit() {
    
@@ -47,12 +47,12 @@ void mousePressed() {
 void submit() {
    if (textboxes.get(0).Text.equals("lemmert")) {
       if (textboxes.get(1).Text.equals("simon")) {
-         players = true;
+         flg_players = true;
       } else {
-         players = false;
+         flg_players = false;
       }
    } else {
-      players = false;
+      flg_players = false;
    }
 }
 
