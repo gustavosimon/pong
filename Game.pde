@@ -1,5 +1,5 @@
 Ball ball; 
-boolean finishGame = false;
+boolean flg_GameFinished = false;
 
 Paddle paddleLeft;
 Paddle paddleRight;
@@ -108,7 +108,7 @@ void drawGame(){
   }
   
   if(scoreDir == maxScore || scoreEsq == maxScore) {
-    finishGame = true;
+    flg_GameFinished = true;
     return;
   }
   // If the ball gets behind the paddle 

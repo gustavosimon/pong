@@ -23,9 +23,11 @@ void draw() {
       gameSetup();
       setupGame = true;
    }
-   drawGame();
-   //
-   if (!finishGame) {
+   
+   // Enquanto o jogo não finalizar, desenha o jogo e retorna
+   // Precisa ser assim pq o draw() deste 'main' fica em loop 
+   while (!flg_GameFinished) {
+      drawGame();
       return;
    }
    drawResult();
