@@ -1,5 +1,4 @@
-Ball ball; // Definindo a 'bola' como objeto global
-
+Ball ball; 
 boolean finishGame = false;
 
 Paddle paddleLeft;
@@ -9,7 +8,6 @@ int maxScore = 5;
 int scoreEsq = 0;
 int scoreDir = 0;
 
-// TODO: make this damn thing work properly
 public StringList login(){
 
   StringList players = new StringList();
@@ -109,7 +107,7 @@ void drawGame(){
     paddleRight.y = paddleRight.h/2;
   }
   
-  if(scoreDir > maxScore || scoreEsq > maxScore) {
+  if(scoreDir == maxScore || scoreEsq == maxScore) {
     finishGame = true;
     return;
   }
