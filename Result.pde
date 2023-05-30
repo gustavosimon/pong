@@ -1,9 +1,10 @@
 void drawResult() {
-    windowResize(400, 250);
 
+    // Adjust result screen size and color
+    windowResize(400, 250);
     background(130, 230, 230);
 
-    // LABELS
+    // Result labels
     fill(250, 250, 250);
     textSize(32);
     text("Result", 200, 60);
