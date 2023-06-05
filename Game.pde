@@ -37,6 +37,13 @@ public class Game implements Screen {
    * Desenha a janela do jogo.
    */
   void draw(){
+
+    /** Verificação de score/endgame */
+    if(p2Score == MAX_SCORE || p1Score == MAX_SCORE) {
+      finishGame = true;
+      return;
+    }
+
     background(0);
 
     /** Funções da bola */
@@ -96,12 +103,6 @@ public class Game implements Screen {
     if ( ball.right() > paddleRight.left() && ball.y > paddleRight.top() && ball.y < paddleRight.bottom()) {
       ball.speedX = -ball.speedX;
       ball.speedY = map(ball.y - paddleRight.y, -paddleRight.h / 2, paddleRight.h / 2, -10, 10);
-    }
-
-    /** Verificação de score/endgame */
-    if(p2Score > MAX_SCORE || p1Score > MAX_SCORE) {
-      finishGame = true;
-      return;
     }
 
     textSize(40);

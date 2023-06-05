@@ -32,7 +32,7 @@ public class Result implements Screen {
         textSize(32);
         text("Result", 200, 60);
         textSize(45);
-        if (p1Score > MAX_SCORE) {
+        if (p1Score == MAX_SCORE) {
             text("Player " + p1Name + " wins!", 200, 125);
         } else {
             text("Player " + p2Name + " wins!", 200, 125);
