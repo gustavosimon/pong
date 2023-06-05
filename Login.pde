@@ -102,6 +102,9 @@ public class Login implements Screen {
       return players;
    }
 
+   /** 
+    * Valida se houve preenchimento dos nomes e seta flag.
+    */
    private void submit() {
       if (!textboxes.get(0).Text.equals("") && !textboxes.get(1).Text.equals("")) {
          players = true;

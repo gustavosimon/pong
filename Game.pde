@@ -38,15 +38,20 @@ public class Game implements Screen {
    */
   void draw(){
     background(0);
+
+    /** Funções da bola */
     ball.display();
     ball.move();
     ball.display();
     
+    /** Funções dos pads/barras */
     paddleLeft.move();
     paddleLeft.display();
     paddleRight.move();
     paddleRight.display();
     
+
+    /** Colisões */
     if (ball.right() > width) {
       p1Score = p1Score + 1;
       ball.x = width / 2;
@@ -82,11 +87,6 @@ public class Game implements Screen {
     if (paddleRight.top() < 0) {
       paddleRight.y = paddleRight.h / 2;
     }
-    
-    if(p2Score > MAX_SCORE || p1Score > MAX_SCORE) {
-      finishGame = true;
-      return;
-    }
 
     if ( ball.left() < paddleLeft.right() && ball.y > paddleLeft.top() && ball.y < paddleLeft.bottom()){
       ball.speedX = -ball.speedX;
@@ -97,7 +97,13 @@ public class Game implements Screen {
       ball.speedX = -ball.speedX;
       ball.speedY = map(ball.y - paddleRight.y, -paddleRight.h / 2, paddleRight.h / 2, -10, 10);
     }
-  
+
+    /** Verificação de score/endgame */
+    if(p2Score > MAX_SCORE || p1Score > MAX_SCORE) {
+      finishGame = true;
+      return;
+    }
+
     textSize(40);
     textAlign(CENTER);
     text(p2Score, width / 2 + 30, 30);
@@ -105,7 +111,7 @@ public class Game implements Screen {
   }
 
   /** 
-   * Evento de precionar tecla do teclado.
+   * Evento de pressionar tecla do teclado.
    */
   public void keyPressed(){
     if(keyCode == UP){
@@ -151,7 +157,7 @@ public class Game implements Screen {
   }
 
   /** 
-   * Evento de precionar botão do mouse. 
+   * Evento de pressionar botão do mouse. 
    */
   public void mousePressed() {
     return;
