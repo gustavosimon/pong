@@ -1,4 +1,4 @@
-public class TEXTBOX {
+public class TextBox {
 
    public int X = 0, Y = 0, H = 35, W = 200;
    public int TEXTSIZE = 24;
@@ -17,11 +17,11 @@ public class TEXTBOX {
 
    private boolean selected = false;
    
-   TEXTBOX() {
+   TextBox() {
       // CREATE OBJECT DEFAULT TEXTBOX
    }
    
-   TEXTBOX(int x, int y, int w, int h) {
+   TextBox(int x, int y, int w, int h) {
       X = x; Y = y; W = w; H = h;
    }
    

@@ -1,32 +1,66 @@
-boolean setupGame = false;
+/** Flag para indicar se já executou o setup do jogo */
+private boolean setupGame = false;
+/** Instância da janela atual */
+private Screen currentScreen;
 
-void setup() {
+/** Instância da janela de Login */
+private Login login = new Login();
+/** Instância da janela principal com o jogo */
+private Game game = new Game();
+
+/** 
+ * Configurações iniciais para a execução do jogo 
+ */
+public void setup() {
    size(400, 250);
-   LoginInit();
+   login.loginInit();
 }
 
-
-// - Adaptar pra não conflitar as chamadas dos callbacks (keyPressed, keyReleased)
-// - Criar array de telas
-
-// - Cria a tela com os resultados por participante
-// - Comparar o conteúdo do login com não vazio (validar que informou dados)
-
-void draw() {
+/** 
+ * Desenha as janelas do jogo 
+ */
+public void draw() {
    // 
-   drawLogin();
-   if (!players) {
+   currentScreen = login;
+   login.draw();
+   if (!login.getPlayers()) {
       return;
    }
    //
+   currentScreen = game;
    if (!setupGame) {
-      gameSetup();
+      game.gameSetup();
       setupGame = true;
    }
-   drawGame();
-   //
-   if (!finishGame) {
+   game.draw();
+   if (!game.isFinishGame()) {
       return;
    }
-   drawResult();
+
+
+   Result result = new Result(login.getPlayer1Name(), login.getPlayer2Name(), game.getPlayer1Score(), game.getPlayer2Score());
+
+   currentScreen = result;
+   result.draw();
+}
+
+/** 
+ * Trata evento de botão do mouse pressionado.
+ */
+void mousePressed() {
+   currentScreen.mousePressed();
+}
+
+/** 
+ * Trata evento de botão do teclado pressionado.
+ */
+void keyPressed() {
+   currentScreen.keyPressed();
+}
+
+/** 
+ * Trata evento de botão do teclado solto.
+ */
+void keyReleased() {
+   currentScreen.keyReleased();
 }
