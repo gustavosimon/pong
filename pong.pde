@@ -34,6 +34,8 @@ public void draw() {
       game.gameSetup();
       setupGame = true;
    }
+
+   // Execução do jogo
    game.draw();
    if (!game.isFinishGame()) {
       return;
@@ -42,6 +44,7 @@ public void draw() {
    // Instancia a janela com os resultados do jogo e aceita-a
    Result result = new Result(login.getPlayer1Name(), login.getPlayer2Name(), game.getPlayer1Score(), game.getPlayer2Score());
 
+   // Seta a tela atual para resultado e exibe  
    currentScreen = result;
    result.draw();
 }
