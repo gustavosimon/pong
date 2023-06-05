@@ -54,7 +54,7 @@ public class Login implements Screen {
             players = false;
          }
       } else {
-         flg_players = false;
+         players = false;
       }
    }
 
