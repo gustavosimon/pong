@@ -20,13 +20,15 @@ public void setup() {
  * Desenha as janelas do jogo 
  */
 public void draw() {
-   // 
+
+   // Aceita a tela de Login
    currentScreen = login;
    login.draw();
    if (!login.getPlayers()) {
       return;
    }
-   //
+
+   // Aceita a tela do jogo Pong
    currentScreen = game;
    if (!setupGame) {
       game.gameSetup();
@@ -37,7 +39,7 @@ public void draw() {
       return;
    }
 
-
+   // Instancia a janela com os resultados do jogo e aceita-a
    Result result = new Result(login.getPlayer1Name(), login.getPlayer2Name(), game.getPlayer1Score(), game.getPlayer2Score());
 
    currentScreen = result;

@@ -3,13 +3,24 @@
  */
 public interface Screen {
 
-    /** Desenha a janela em tela */
+    /** 
+     * Desenha a janela em tela. 
+     */
     public void draw();
-    /** Evento de soltar tecla do teclado */
+    
+    /** 
+     * Evento de soltar tecla do teclado.
+     */
     public void keyReleased();
-    /** Evento de precionar tecla do teclado */
+    
+    /** 
+     * Evento de precionar tecla do teclado.
+     */
     public void keyPressed();
-    /** Evento de precionar botão do mouse */
+
+    /** 
+     * Evento de precionar botão do mouse. 
+     */
     public void mousePressed();
 
 }
