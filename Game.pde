@@ -121,10 +121,10 @@ public class Game implements Screen {
     if(keyCode == DOWN){
       paddleRight.speedY = 3;
     }
-    if(key == 'a'){
+    if(key == 'a' || key == 'A'){
       paddleLeft.speedY = -3;
     }
-    if(key == 'z'){
+    if(key == 'z' || key == 'Z'){
       paddleLeft.speedY = 3;
     }
   }
@@ -141,11 +141,9 @@ public class Game implements Screen {
     }
     if(key == 'a' || key == 'A'){
       paddleLeft.speedY=0;
-      print(key);
     }
     if(key == 'z' || key == 'Z'){
       paddleLeft.speedY=0;
-      print(key);
     }
   }
 
