@@ -139,11 +139,13 @@ public class Game implements Screen {
     if(keyCode == DOWN){
       paddleRight.speedY=0;
     }
-    if(key == 'a'){
+    if(key == 'a' || key == 'A'){
       paddleLeft.speedY=0;
+      print(key);
     }
-    if(key == 'z'){
+    if(key == 'z' || key == 'Z'){
       paddleLeft.speedY=0;
+      print(key);
     }
   }
 
